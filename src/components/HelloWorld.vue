@@ -31,11 +31,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+//import {mixins} from "vue-class-component";
+// Both imports from vue-class-component and vue-property-decorator do not provide completion
+import { Component, Prop, Mixins } from 'vue-property-decorator';
+import MyMixin from "@/my-mixin";
 
 @Component
-export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+export default class HelloWorld extends Mixins(MyMixin) {
+  @Prop() private msg = this.myMixinValue; // correctly revolved, the Mixin works.
+
+  // No completion here
 }
 </script>
 
